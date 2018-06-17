@@ -47,9 +47,8 @@ void ATankPlayerController::AimTowardsCrosshair()
 	FVector HitLocation; //OUT parameter
 	if (GetSightRayHitLocation(HitLocation))
 	{
-		DrawDebugLine(GetWorld(),PlayerCameraManager->GetCameraLocation(), HitLocation, FColor(255, 0, 0), false, 0.f, 0.f, 10.f);
-
-		UE_LOG(LogTemp, Warning, TEXT("HitLocation: %s "), *HitLocation.ToString())
+			//DrawDebugLine(GetWorld(), PlayerCameraManager->GetCameraLocation(), HitLocation, FColor(255, 0, 0), false, 0.f, 0.f, 10.f);
+			GetControlledTank()->AimAt(HitLocation);
 	}
 
 }
@@ -58,6 +57,7 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& HitLocation) const
 {	
 	int32 ViewportSizeX, ViewportSizeY;
 	GetViewportSize(ViewportSizeX, ViewportSizeY);
+
 	auto ScreenLocation = FVector2D(ViewportSizeX * CrosshairXLocation, ViewportSizeY * CrosshairYLocation);
 
 	FVector LookDirection;
